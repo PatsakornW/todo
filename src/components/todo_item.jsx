@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Button, Box } from "@mui/material";
+import { Typography,Button, Tooltip, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
@@ -11,7 +11,6 @@ const Todo_Item = ({ data, edit_todo, delete_todo }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-
         padding: "8px",
         marginTop: "8px",
       }}
@@ -19,13 +18,18 @@ const Todo_Item = ({ data, edit_todo, delete_todo }) => {
       <Typography sx={{ flexGrow: 1, marginRight: "10px" }}>
         {data.title}
       </Typography>
-      <Box sx={{ display: "flex" }}>
-        <IconButton onClick={() => edit_todo(data.id)} color="primary">
-          <EditIcon />
-        </IconButton>
-        <IconButton onClick={() => delete_todo(data.id)} color="error">
-          <DeleteIcon />
-        </IconButton>
+      <Box sx={{ display: "flex",gap:"5px" }}>
+        <Tooltip title="Edit">
+          <Button variant="contained" color="primary" onClick={() => edit_todo(data.id)} sx={{minWidth:"5px"}}>
+            <EditIcon  fontSize="small"/>
+          </Button>
+        </Tooltip>
+
+        <Tooltip title="Remove ">
+          <Button variant="contained" color="error" onClick={() => delete_todo(data.id)} sx={{minWidth:"5px"}}>
+            <DeleteIcon fontSize="small"/>
+          </Button>
+        </Tooltip>
       </Box>
     </Box>
   );

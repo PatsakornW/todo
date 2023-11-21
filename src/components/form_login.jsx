@@ -47,7 +47,7 @@ const Form_login = ({ setToggle }) => {
               name="email"
               type="email"
               label="Email Address"
-              variant="filled"
+              color="warning"
               onChange={formik.handleChange}
               value={formik.values.email}
               error={formik.touched.email && Boolean(formik.errors.email)}
@@ -62,7 +62,8 @@ const Form_login = ({ setToggle }) => {
               id="password"
               name="password"
               type="password"
-              variant="filled"
+              color="warning"
+              label="Password"
               onChange={formik.handleChange}
               value={formik.values.password}
               error={formik.touched.password && Boolean(formik.errors.password)}
@@ -87,7 +88,7 @@ const Form_login = ({ setToggle }) => {
                   fontSize: "14px",
                   marginLeft: "5px",
                   "&:hover": {
-                    color: "#2196f3",
+                    color: "#ef981e",
                     cursor: "pointer",
                     textDecoration: "underline",
                   },
@@ -102,9 +103,11 @@ const Form_login = ({ setToggle }) => {
             <Button
               fullWidth
               variant="contained"
-              color="primary"
               type="submit"
-              style={{ marginTop: "10px" }}
+              color="warning"
+              sx={{
+                marginTop: "10px",
+              }}
             >
               Login
             </Button>

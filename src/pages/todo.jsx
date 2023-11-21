@@ -71,7 +71,7 @@ const Todo = () => {
             height: "100vh",
           }}
         >
-          <Card sx={{ maxWidth: "auto" }}>
+          <Card sx={{ maxWidth: "auto", borderRadius: "10px"  }}>
             <CardContent>
               <Add_Form
                 add_todo={add_todo}
@@ -89,14 +89,11 @@ const Todo = () => {
               ))}
             </CardContent>
             <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-              <Tooltip title="Remove userData in Local storage">
-                <Button onClick={handleDeleteUserData} color="error">
-                  <Typography sx={{ fontSize: "12px" }}>
-                    ** Remove userData in Local storage **
-                  </Typography>
-                  <DeleteIcon />
-                </Button>
-              </Tooltip>
+              <Button onClick={handleDeleteUserData} color="error">
+                <Typography sx={{ fontSize: "12px" }}>
+                  ** Remove userData in Local storage **
+                </Typography>
+              </Button>
             </CardActions>
           </Card>
         </Box>

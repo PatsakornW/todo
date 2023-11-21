@@ -46,7 +46,7 @@ const Form_regis = ({ setToggle }) => {
               name="email"
               type="email"
               label="Email"
-              variant="filled"
+              color="warning"
               onChange={formik.handleChange}
               value={formik.values.email}
               error={formik.touched.email && Boolean(formik.errors.email)}
@@ -55,13 +55,13 @@ const Form_regis = ({ setToggle }) => {
           </Grid>
           <Grid>
             <TextField
-              sx={{ marginY: "5px" }}
+              sx={{ marginY: "5px"}}
               fullWidth
               id="password"
               name="password"
               type="password"
               label="Password"
-              variant="filled"
+              color="warning"
               onChange={formik.handleChange}
               value={formik.values.password}
               error={formik.touched.password && Boolean(formik.errors.password)}
@@ -72,11 +72,11 @@ const Form_regis = ({ setToggle }) => {
             <Button
               fullWidth
               variant="contained"
-              color="primary"
-              type="submit"
-              style={{ marginTop: "10px" }}
+              color="warning"
+              type="submit"        
+              sx={{ marginTop: "10px"}}
             >
-              Submit
+              Register
             </Button>
           </Grid>
         </form>
