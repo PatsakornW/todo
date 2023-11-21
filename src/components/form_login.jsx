@@ -20,7 +20,7 @@ const Form_login = ({ setToggle }) => {
     onSubmit: (values, { setErrors }) => {
       const userData = JSON.parse(localStorage.getItem("userData"));
       if (!userData) {
-        setErrors({ email: "Invalid email", password: "Invalid password" });
+        setErrors({ email: "Please fill in email", password: "Please fill in password" });
         return;
       }
 
