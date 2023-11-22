@@ -10,7 +10,7 @@ import {
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 
-const Form_login = ({ setToggle }) => {
+const FormLogin = ({ setToggle }) => {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -20,7 +20,10 @@ const Form_login = ({ setToggle }) => {
     onSubmit: (values, { setErrors }) => {
       const userData = JSON.parse(localStorage.getItem("userData"));
       if (!userData) {
-        setErrors({ email: "Please fill in email", password: "Please fill in password" });
+        setErrors({
+          email: "Please fill in email",
+          password: "Please fill in password",
+        });
         return;
       }
 
@@ -36,86 +39,82 @@ const Form_login = ({ setToggle }) => {
   });
 
   return (
-    <Container>
-      <Grid>
-        <form onSubmit={formik.handleSubmit}>
-          <Grid>
-            <TextField
-              sx={{ marginY: "5px" }}
-              fullWidth
-              id="email"
-              name="email"
-              type="email"
-              label="Email Address"
-              color="warning"
-              onChange={formik.handleChange}
-              value={formik.values.email}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-            />
-          </Grid>
+    <Container component={"div"}>
+      <Box
+        component={"form"}
+        onSubmit={formik.handleSubmit}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+        }}
+      >
+        <TextField
+          fullWidth
+          id="email"
+          name="email"
+          type="email"
+          label="Email Address"
+          color="warning"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
+        />
 
-          <Grid>
-            <TextField
-              sx={{ marginY: "5px" }}
-              fullWidth
-              id="password"
-              name="password"
-              type="password"
-              color="warning"
-              label="Password"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-            />
-          </Grid>
+        <TextField
+          fullWidth
+          id="password"
+          name="password"
+          type="password"
+          color="warning"
+          label="Password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
+        />
 
-          <Grid>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "10px",
-              }}
-            >
-              <Typography sx={{ fontSize: "14px" }}>
-                Do you have not account ?{" "}
-              </Typography>
-              <Typography
-                onClick={() => setToggle(false)}
-                sx={{
-                  fontSize: "14px",
-                  marginLeft: "5px",
-                  "&:hover": {
-                    color: "#ef981e",
-                    cursor: "pointer",
-                    textDecoration: "underline",
-                  },
-                }}
-              >
-                Register
-              </Typography>
-            </Box>
-          </Grid>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "10px",
+          }}
+        >
+          <Typography sx={{ fontSize: "14px" }}>
+            Do you have not account ?{" "}
+          </Typography>
+          <Typography
+            onClick={() => setToggle(false)}
+            sx={{
+              fontSize: "14px",
+              marginLeft: "5px",
+              "&:hover": {
+                color: "#ef981e",
+                cursor: "pointer",
+                textDecoration: "underline",
+              },
+            }}
+          >
+            Register
+          </Typography>
+        </Box>
 
-          <Grid>
-            <Button
-              fullWidth
-              variant="contained"
-              type="submit"
-              color="warning"
-              sx={{
-                marginTop: "10px",
-              }}
-            >
-              Login
-            </Button>
-          </Grid>
-        </form>
-      </Grid>
+        <Button
+          fullWidth
+          variant="contained"
+          type="submit"
+          color="warning"
+          sx={{
+            marginTop: "10px",
+          }}
+        >
+          Login
+        </Button>
+      </Box>
     </Container>
   );
 };
 
-export default Form_login;
+export default FormLogin;

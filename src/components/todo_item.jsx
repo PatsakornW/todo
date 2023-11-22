@@ -2,7 +2,6 @@ import React from "react";
 import { Typography,Button, Tooltip, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import IconButton from "@mui/material/IconButton";
 
 const Todo_Item = ({ data, edit_todo, delete_todo }) => {
   return (

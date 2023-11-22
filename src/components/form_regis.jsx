@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, Button, Container, Grid } from "@mui/material";
+import { TextField, Button, Container, Grid, Box } from "@mui/material";
 import { useFormik } from "formik";
 
 const Form_regis = ({ setToggle }) => {
@@ -37,7 +37,7 @@ const Form_regis = ({ setToggle }) => {
   return (
     <Container>
       <Grid>
-        <form onSubmit={formik.handleSubmit}>
+        <Box component={"form"} onSubmit={formik.handleSubmit}>
           <Grid>
             <TextField
               sx={{ marginY: "5px" }}
@@ -79,7 +79,7 @@ const Form_regis = ({ setToggle }) => {
               Register
             </Button>
           </Grid>
-        </form>
+        </Box>
       </Grid>
     </Container>
   );

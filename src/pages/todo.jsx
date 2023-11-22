@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Add_Form from "../components/add_form";
 import Todo_Item from "../components/todo_item";
 import { Navigate, useNavigate } from "react-router-dom";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 import {
   Box,
@@ -10,7 +9,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  Tooltip,
   Typography,
 } from "@mui/material";
 
@@ -18,6 +16,8 @@ const Todo = () => {
   const [todo, settodo] = useState([]);
   const [newtodo, setnewtodo] = useState("");
   const [editid, seteditid] = useState(null);
+  const [todoId, setTodoId] = useState(0);
+  const [titleError, setTitleError] = useState(false);
 
   const userData = JSON.parse(localStorage.getItem("userData"));
   const navigate = useNavigate();
@@ -25,25 +25,38 @@ const Todo = () => {
   const add_todo = (e) => {
     e.preventDefault();
     if (editid) {
-      const update = todo.map((item) => {
-        if (item.id === editid) {
-          return { ...item, title: newtodo };
-        }
-        return item;
-      });
-      settodo(update);
-      seteditid(null);
-      setnewtodo("");
+      const checkEditTitle = todo.some(
+        (item) => item.title === newtodo && item.id !== editid
+      );
+      if (checkEditTitle) {
+        setTitleError(true);
+      } else {
+        const update = todo.map((item) => {
+          if (item.id === editid) {
+            return { ...item, title: newtodo };
+          }
+          return item;
+        });
+        settodo(update);
+        seteditid(null);
+        setnewtodo("");
+        setTitleError(false);
+      }
     } else {
-      const item = {
-        id: Math.floor(Math.random() * 10),
-        title: newtodo,
-      };
-      settodo([...todo, item]);
-      setnewtodo("");
+      const checkNewTitle = todo.some((item) => item.title === newtodo);
+      if (checkNewTitle) {
+        setTitleError(true);
+      } else {
+        const item = {
+          id: todoId + 1,
+          title: newtodo,
+        };
+        settodo([...todo, item]);
+        setnewtodo("");
+        setTodoId(todoId + 1);
+      }
     }
   };
-
   const edit_todo = (id) => {
     seteditid(id);
     const edit = todo.find((item) => item.id == id);
@@ -61,7 +74,7 @@ const Todo = () => {
   };
 
   return (
-    <div>
+    <Box>
       {userData ? (
         <Box
           sx={{
@@ -71,13 +84,15 @@ const Todo = () => {
             height: "100vh",
           }}
         >
-          <Card sx={{ maxWidth: "auto", borderRadius: "10px"  }}>
+          <Card sx={{ maxWidth: 400, borderRadius: "10px" }}>
             <CardContent>
               <Add_Form
                 add_todo={add_todo}
                 newtodo={newtodo}
                 setnewtodo={setnewtodo}
                 editid={editid}
+                setTitleError={setTitleError}
+                titleError={titleError}
               />
               {todo.map((data) => (
                 <Todo_Item
@@ -100,7 +115,7 @@ const Todo = () => {
       ) : (
         <Navigate to={"/"} />
       )}
-    </div>
+    </Box>
   );
 };
 

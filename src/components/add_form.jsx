@@ -2,7 +2,7 @@ import React from "react";
 import { TextField, Button, Box } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";
 
-const Add_Form = ({ add_todo, newtodo, setnewtodo, editid }) => {
+const Add_Form = ({ add_todo, newtodo, setnewtodo, editid,titleError,setTitleError }) => {
   const theme = createTheme({
     palette: {
       warning: {
@@ -19,16 +19,21 @@ const Add_Form = ({ add_todo, newtodo, setnewtodo, editid }) => {
   });
   return (
     <ThemeProvider theme={theme}>
-      <form onSubmit={add_todo}>
+      <Box component={"form"} onSubmit={add_todo}>
         <Box display="flex">
           <TextField
             type="text"
             placeholder="Add a new todo"
             value={newtodo}
-            onChange={(e) => setnewtodo(e.target.value)}
+            onChange={(e) => {
+              setnewtodo(e.target.value);
+              setTitleError(false);
+            }}
             variant="outlined"
             fullWidth
             color="warning"
+            error={titleError}
+          
             sx={{ borderRadius: "4px 0 0 4px" }}
           />
           <Button
@@ -40,7 +45,7 @@ const Add_Form = ({ add_todo, newtodo, setnewtodo, editid }) => {
             {editid ? "Update" : "Add"}
           </Button>
         </Box>
-      </form>
+      </Box>
     </ThemeProvider>
   );
 };

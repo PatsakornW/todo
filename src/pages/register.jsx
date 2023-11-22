@@ -1,11 +1,12 @@
 import React from "react";
 import Form_regis from "../components/form_regis";
+import { Box } from "@mui/material";
 
 const Register = ({ setToggle }) => {
   return (
-    <div>
+    <Box>
       <Form_regis setToggle={setToggle} />
-    </div>
+    </Box>
   );
 };
 
